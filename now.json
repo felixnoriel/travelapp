@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "felixnoriel-nextjs",
+    "name": "travelapp",
     "builds": [
         {
             "src": "package.json",
@@ -10,6 +10,19 @@
             }
         }
     ],
+    "build": {
+        "env": {
+            "COGNITO_USER_POOL_ID": "@cognito_user_pool_id",
+            "COGNITO_REGION": "@cognito_region",
+            "COGNITO_APP_CLIENT_ID": "@cognito_app_client_id",
+            "COGNITO_REDIRECT_SIGNIN": "@cognito_redirect_signin",
+            "COGNITO_REDIRECT_SIGNOUT": "@cognito_redirect_signout",
+            "COGNITO_DOMAIN": "@cognito_domain",
+            "MAPBOX_PUBLIC_API_KEY": "@mapbox_public_api_key",
+            "MAPBOX_DEV_API_KEY": "@mapbox_dev_api_key",
+            "REST_API_URL": "@rest_api_url"
+        }
+    },
     "routes": [
         {
             "src": "/",
