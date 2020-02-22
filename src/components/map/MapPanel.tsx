@@ -24,7 +24,7 @@ export const MapPanel = () => {
     const MemoRenderPanel = useMemo(
         () => (
             <List>
-                <h3>List</h3>
+                <h3>List - click an item to navigate</h3>
                 {storeMapMarkers.map((marker: any, index: number) => (
                     <ListItem button key={marker.id} onClick={() => markerClick(marker)}>
                         <p>
