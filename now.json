@@ -1,0 +1,30 @@
+{
+    "version": 2,
+    "name": "felixnoriel-nextjs",
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@now/next",
+            "config": {
+                "maxLambdaSize": "25mb"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/index",
+            "headers": { "Cache-Control": "s-maxage=2592000" }
+        },
+        {
+            "src": "/account/login",
+            "dest": "/account/login",
+            "headers": { "Cache-Control": "s-maxage=2592000" }
+        },
+        {
+            "src": "/account/register",
+            "dest": "/account/register",
+            "headers": { "Cache-Control": "s-maxage=2592000" }
+        }
+    ]
+}
