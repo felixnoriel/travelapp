@@ -2,7 +2,9 @@ import { useState, useEffect, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { MAPBOX_PUBLIC_API_KEY } from '../../../config';
-import { MapStore } from '../store/map/MapContext';
+import { MapStore } from '../../lib/store/map/MapContext';
+import { SET_SEARCH, SET_VENUES } from '../../lib/store/map/MapTypes';
+import foursquareAPI from '../../lib/foursquare'
 
 export const Search = () => {
     const { dispatch } = useContext(MapStore);
@@ -27,10 +29,15 @@ export const Search = () => {
         };
     }, [search]);
 
-    const dispatchSearch = (e: any, value: any) => {
+    const dispatchSearch = async (e: any, value: any) => {
         dispatch({
-            type: 'SET_SEARCH',
+            type: SET_SEARCH,
             searchCoordinates: value,
+        });
+        const venues = await foursquareAPI().getVenues({ll: `${value.center[1]},${value.center[0]}`});
+        dispatch({
+            type: SET_VENUES,
+            venues: venues,
         });
     };
     return (

@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react';
-import { MapStore } from '../store/map/MapContext';
+import { MapStore } from '../../lib/store/map/MapContext';
 import { FlyToInterpolator } from 'react-map-gl';
-import { SET_VIEW_PORT } from '../store/map/MapTypes';
+import { SET_VIEW_PORT } from '../../lib/store/map/MapTypes';
 import { List, ListItem, ListItemText, Divider } from '@material-ui/core';
 
 export const MapPanel = () => {

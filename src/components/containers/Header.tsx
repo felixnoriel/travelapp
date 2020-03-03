@@ -1,6 +1,7 @@
 import { Auth } from 'aws-amplify';
 import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Link from 'next/link'
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -22,6 +23,11 @@ const useStyles = makeStyles(theme => ({
     link: {
         margin: theme.spacing(1, 1.5),
     },
+    nav: {
+        '& a': {
+            margin: theme.spacing(1, 1.5),
+        }
+    }
 }));
 
 const Header = () => {
@@ -32,17 +38,14 @@ const Header = () => {
                 <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
                     Company
                 </Typography>
-                {/* <nav>
-                <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-                Features
-                </Link>
-                <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-                Enterprise
-                </Link>
-                <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-                Support
-                </Link>
-            </nav> */}
+                <nav className={classes.nav}>
+                    <Link href='/'>
+                        <a>Home</a>
+                    </Link>
+                    <Link href='/feed'>
+                        <a>Feed</a>
+                    </Link>
+                </nav>
                 <Button
                     onClick={() => Auth.signOut()}
                     href="#"

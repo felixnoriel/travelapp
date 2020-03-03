@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import { MainStoreProvider } from '../store/main/MainContext';
+import { MainStoreProvider } from '../../lib/store/main/MainContext';
 import { SnackbarAlert } from './Snackbar';
 import { CssBaseline } from '@material-ui/core';
 

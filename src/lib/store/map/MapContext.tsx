@@ -1,5 +1,5 @@
 import React, { useReducer, createContext } from 'react';
-import { SET_SEARCH, SET_VIEW_PORT, SET_MARKERS } from './MapTypes';
+import { SET_SEARCH, SET_VIEW_PORT, SET_MARKERS, SET_VENUES } from './MapTypes';
 
 const initialState = {
     searchCoordinates: {},
@@ -38,6 +38,11 @@ const reducer = (state: any, action: any) => {
                 ...state,
                 markers: action.markers,
             };
+        case SET_VENUES:
+            return {
+                ...state,
+                venues: action.venues.response.venues
+            }
         default:
             return state;
     }

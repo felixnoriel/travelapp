@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { MainStore } from '../store/main/MainContext';
-import { SET_SNACKBAR } from '../store/main/MainTypes';
+import { MainStore } from '../../lib/store/main/MainContext';
+import { SET_SNACKBAR } from '../../lib/store/main/MainTypes';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import { makeStyles, Theme } from '@material-ui/core/styles';

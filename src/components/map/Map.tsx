@@ -3,19 +3,29 @@ import ReactMapGL, { NavigationControl, GeolocateControl, Popup } from 'react-ma
 import { Button } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import { MAPBOX_PUBLIC_API_KEY, REST_API_URL } from '../../../config';
-import { MapStore } from '../store/map/MapContext';
-import { UserStore } from '../store/user/UserContext';
-import { MainStore } from '../store/main/MainContext';
-import { SET_VIEW_PORT, SET_MARKERS } from '../store/map/MapTypes';
-import { SET_SNACKBAR } from '../store/main/MainTypes';
+import { MapStore } from '../../lib/store/map/MapContext';
+import { UserStore } from '../../lib/store/user/UserContext';
+import { MainStore } from '../../lib/store/main/MainContext';
+import { SET_VIEW_PORT, SET_MARKERS, SET_VENUES } from '../../lib/store/map/MapTypes';
+import { SET_SNACKBAR } from '../../lib/store/main/MainTypes';
 import { CreateMarker } from './CreateMarker';
 import { Pins } from './ListMarker';
-
+import foursquareAPI from '../../lib/foursquare'
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        popup: {
+            zIndex: 1
+        },
+    })
+);
 
 export const Map = () => {
+    const classes = useStyles()
     const {
-        state: { viewPort: storeMapViewPort, markers: storeMapMarkers },
+        state: { viewPort: storeMapViewPort, markers: storeMapMarkers, venues: storeMapVenues },
         dispatch: mapDispatch,
     } = useContext(MapStore);
     const { state: userState } = useContext(UserStore);
@@ -42,6 +52,17 @@ export const Map = () => {
             mapDispatch({
                 type: SET_MARKERS,
                 markers: responseJSON,
+            });
+            const venues: any = await foursquareAPI().getVenues(
+                {
+                    ll: `${storeMapViewPort.latitude},${storeMapViewPort.longitude}`,
+                    radius: 1000,
+                    query: 'restaurant',
+                    limit: 100
+                });
+            mapDispatch({
+                type: SET_VENUES,
+                venues: venues,
             });
         };
 
@@ -147,6 +168,7 @@ export const Map = () => {
         () => (
             <Pins
                 markers={storeMapMarkers}
+                type='user'
                 onClickMarker={marker => {
                     console.log({
                         latitude: marker.markers.latitude,
@@ -165,6 +187,25 @@ export const Map = () => {
             />
         ),
         [storeMapMarkers]
+    );
+
+    const MemoRenderPinsFoursquare = useMemo(
+        () => (
+            <Pins
+                markers={storeMapVenues}
+                type='foursquare'
+                onClickMarker={marker => {
+                    setShowPopup(true);
+                    setPopupValues({
+                        latitude: marker.location.lat,
+                        longitude: marker.location.lng,
+                        name: marker.name,
+                        description: marker.location.address,
+                    });
+                }}
+            />
+        ),
+        [storeMapVenues]
     );
 
     const MemoRenderCreateMarker = useMemo(
@@ -196,6 +237,7 @@ export const Map = () => {
                     longitude={popupValues.longitude}
                     closeButton={true}
                     closeOnClick={false}
+                    className={classes.popup}
                     onClose={() => setShowPopup(false)}
                     anchor="top"
                 >
@@ -206,6 +248,7 @@ export const Map = () => {
 
             {showCreateMarker && MemoRenderCreateMarker}
             {MemoRenderPins}
+            {MemoRenderPinsFoursquare}
             <div style={{ position: 'absolute', right: 0, top: 40 }}>
                 <NavigationControl />
                 <GeolocateControl positionOptions={{ enableHighAccuracy: true }} trackUserLocation={true} />

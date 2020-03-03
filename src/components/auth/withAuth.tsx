@@ -4,8 +4,8 @@ import { useRouter } from 'next/router'
 import { cognitoConfigAuth } from '../../../config';
 import LoginPage from './login';
 import RegisterPage from './register';
-import { FETCH_USER_DATA_INIT, FETCH_USER_DATA_SUCCESS, FETCH_USER_DATA_FAILURE, RESET_USER_DATA } from '../store/user/UserTypes';
-import { userReducer, UserStoreProvider } from '../store/user/UserContext';
+import { FETCH_USER_DATA_INIT, FETCH_USER_DATA_SUCCESS, FETCH_USER_DATA_FAILURE, RESET_USER_DATA } from '../../lib/store/user/UserTypes';
+import { userReducer, UserStoreProvider } from '../../lib/store/user/UserContext';
 
 Amplify.configure({
     Auth: cognitoConfigAuth

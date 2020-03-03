@@ -29,3 +29,6 @@ export const cognitoConfigAuth = {
 
 export const MAPBOX_PUBLIC_API_KEY = process.env.MAPBOX_PUBLIC_API_KEY || '';
 export const REST_API_URL = process.env.REST_API_URL || '';
+
+export const FOURSQUARE_CLIENT_ID = process.env.FOURSQUARE_CLIENT_ID || '';
+export const FOURSQUARE_CLIENT_SECRET = process.env.FOURSQUARE_CLIENT_SECRET || '';

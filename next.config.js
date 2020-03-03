@@ -16,6 +16,8 @@ const {
     COGNITO_REDIRECT_SIGNIN,
     COGNITO_REDIRECT_SIGNOUT,
     COGNITO_DOMAIN,
+    FOURSQUARE_CLIENT_ID,
+    FOURSQUARE_CLIENT_SECRET
 } = process.env;
 
 const nextConfig = {
@@ -29,6 +31,8 @@ const nextConfig = {
         COGNITO_REDIRECT_SIGNIN,
         COGNITO_REDIRECT_SIGNOUT,
         COGNITO_DOMAIN,
+        FOURSQUARE_CLIENT_ID,
+        FOURSQUARE_CLIENT_SECRET
     },
 };
 

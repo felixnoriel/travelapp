@@ -20,7 +20,9 @@
             "COGNITO_DOMAIN": "@cognito_domain",
             "MAPBOX_PUBLIC_API_KEY": "@mapbox_public_api_key",
             "MAPBOX_DEV_API_KEY": "@mapbox_dev_api_key",
-            "REST_API_URL": "@rest_api_url"
+            "REST_API_URL": "@rest_api_url",
+            "FOURSQUARE_CLIENT_ID": "@foursquare_client_id",
+            "FOURSQUARE_CLIENT_SECRET": "@foursquare_client_secret"
         }
     },
     "routes": [

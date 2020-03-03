@@ -2,7 +2,7 @@ import { Container, Grid } from '@material-ui/core';
 import './rootmap.scss';
 import { Map } from './Map';
 import { Search } from './Search';
-import { MapStoreProvider } from '../store/map/MapContext';
+import { MapStoreProvider } from '../../lib/store/map/MapContext';
 import { MapPanel } from './MapPanel';
 import { Drawer } from '@material-ui/core';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
