@@ -15,7 +15,9 @@ const MainContainer: React.SFC<IMainContainer> = ({ children }) => {
             <CssBaseline />
             <SnackbarAlert />
             <Header />
-            {children}
+            <div style={{paddingTop: '60px'}}>
+                {children}
+            </div>
             <Footer />
         </MainStoreProvider>
     );
