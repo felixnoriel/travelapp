@@ -3,6 +3,7 @@ import {Button, Grid, Dialog, CardMedia, DialogActions, DialogContent, DialogCon
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { feedData } from './feedData'
 import Rating from '@material-ui/lab/Rating';
+import { SearchCompletion } from './searchCompletion'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,14 +46,7 @@ export default ({
             <Typography className={classes.perItemLabel} variant="body1" component="p">
               Details
             </Typography>
-            <TextField
-                variant="outlined"
-                margin="none"
-                required
-                fullWidth
-                label="Location"
-                autoFocus
-              />
+            <SearchCompletion />
           </Grid>
           <Grid item className={classes.perItem}>
             <Typography className={classes.perItemLabel} variant="body1" component="p">

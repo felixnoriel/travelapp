@@ -1,7 +1,7 @@
 import React from 'react';
 import MainContainer from '../containers/MainContainer';
 import clsx from 'clsx';
-import { feedData } from './feedData'
+import { feedData, users, getUser, feedFavouriteList } from './feedData'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Card, Button, Grid, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, IconButton, Typography, Divider } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
@@ -13,12 +13,14 @@ import MessageIcon from '@material-ui/icons/Message';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import Dialog from './dialog'
+import Router from 'next/router'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
       maxWidth: 645,
-      margin: theme.spacing(1.5, 0)
+      margin: theme.spacing(1.5, 0),
+      cursor: 'pointer'
     },
     mainGrid: {
         display: 'flex',
@@ -100,23 +102,45 @@ const Feed: React.SFC<{}> = () => {
                             <Typography className={classes.savedPostLabel} variant="body2" color="textSecondary" component="p" >Your saved posts:</Typography>
                             {
                                 feedData.map((item, index) => {
+                                    if (index > 2) return
                                     return (
                                     <Grid item key={'favourite-' + item.id}>
                                         <Card className={classes.savedPostList}>
                                             <CardHeader
                                                 avatar={
-                                                <Avatar aria-label="user-avatar" src={item.user.avatar} />
+                                                <Avatar aria-label="user-avatar" src={getUser(item.user).avatar} />
                                                 }
                                                 action={
                                                 <IconButton aria-label="settings">
                                                     <FavoriteIcon />
                                                 </IconButton>
                                                 }
-                                                title={item.user.name}
+                                                title={getUser(item.user).name}
                                                 subheader={item.location}
                                             />
                                         </Card>
-                                        {feedData.length !== (index + 1) && <Divider />}
+                                        {index < 2 && <Divider />}
+                                    </Grid>
+                                    )
+                                })
+                            }
+                        </Card>
+                        <Card className={classes.sideCard}>
+                            <Typography className={classes.savedPostLabel} variant="body2" color="textSecondary" component="p" >Your favourite list:</Typography>
+                            {
+                                feedFavouriteList.map((item, index) => {
+                                    if (index > 2) return
+                                    return (
+                                    <Grid item key={'favourite-' + item.id}>
+                                        <Card className={classes.savedPostList}>
+                                            <CardHeader
+                                                avatar={
+                                                    <Avatar aria-label="user-avatar" src={item.flag} />
+                                                }
+                                                title={item.name}
+                                            />
+                                        </Card>
+                                        {index < 2 && <Divider />}
                                     </Grid>
                                     )
                                 })
@@ -147,17 +171,17 @@ const FeedItem = ({
         setExpandedComment(!expandedComment);
     };
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} onClick={() => Router.push('/feed/view')}>
             <CardHeader
                 avatar={
-                <Avatar aria-label="user-avatar" src={feedItem.user.avatar} />
+                <Avatar aria-label="user-avatar" src={getUser(feedItem.user).avatar} />
                 }
                 action={
                 <IconButton aria-label="settings">
                     <FavoriteIcon />
                 </IconButton>
                 }
-                title={feedItem.user.name}
+                title={getUser(feedItem.user).name}
                 subheader={feedItem.location}
             />
             <CardMedia

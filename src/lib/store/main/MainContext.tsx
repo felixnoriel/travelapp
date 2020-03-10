@@ -1,5 +1,5 @@
 import React, { useReducer, createContext } from 'react'
-import { SET_SNACKBAR } from './MainTypes';
+import { SET_SNACKBAR, FS_SEARCH_COMPLETION } from './MainTypes';
 
 const initialState = {
     snackbar: {
@@ -18,6 +18,13 @@ const reducer = (state: any, action: any) => {
                     ...action.snackbar
                 }
             };
+        case FS_SEARCH_COMPLETION:
+            return {
+                ...state,
+                fsSearchCompletion: {
+                    ...action.fsSearchCompletion
+                }
+            }
         default:
             return state;
     }
